@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self Care — Tu piel. Tu ritual.</title>
+<meta name="description" content="Cuidado personal pensado para el hombre moderno. Sin complicaciones, sin etiquetas. Solo resultados.">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dark:#2c3e50;
+  --mid:#6c757d;
+  --light:#ffffff;
+  --bg:#f8f9fa;
+  --glass-bg:rgba(255,255,255,0.72);
+  --glass-border:rgba(255,255,255,0.88);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+
+/* NAVBAR */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;
+  background:rgba(44,62,80,0.96);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+.nav-logo{
+  font-family:'Instrument Serif',serif;
+  font-style:italic;font-size:22px;
+  color:#fff;letter-spacing:1px;
+}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{
+  font-size:11px;font-weight:500;
+  letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.55);
+  text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:#fff}
+.nav-cta{
+  background:#fff;color:var(--dark);
+  border:none;border-radius:99px;
+  padding:9px 22px;
+  font-family:'Barlow',sans-serif;
+  font-size:11px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;
+  text-decoration:none;
+}
+.nav-cta:hover{background:#e9ecef}
+
+/* HAMBURGER MOBILE */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(44,62,80,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:13px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.7);text-decoration:none}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;
+  padding:120px 48px 80px;
+  background:linear-gradient(160deg,#ffffff 0%,#f0f2f4 50%,#e8ecef 100%);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;
+  width:600px;height:300px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(108,117,125,0.12) 0%,transparent 70%);
+  top:-80px;left:50%;transform:translateX(-50%);
+  filter:blur(60px);pointer-events:none;
+}
+.dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(44,62,80,0.05) 1px,transparent 1px);
+  background-size:28px 28px;pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  border-radius:99px;padding:6px;
+  margin-bottom:40px;
+  opacity:0;animation:fadeUp 0.6s 0.1s ease forwards;
+}
+.hero-badge-pill{
+  background:var(--dark);color:#fff;
+  border-radius:99px;padding:4px 14px;
+  font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+}
+.hero-badge-text{
+  font-size:11px;font-weight:500;color:var(--mid);
+  letter-spacing:1px;padding-right:10px;
+}
+.hero-title{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:clamp(3.5rem,8vw,6rem);
+  line-height:0.88;letter-spacing:-0.02em;
+  color:var(--dark);margin-bottom:28px;
+  opacity:0;animation:fadeUp 0.7s 0.25s ease forwards;
+}
+.hero-title span{color:var(--mid)}
+.hero-sub{
+  font-size:16px;font-weight:300;
+  color:rgba(44,62,80,0.58);
+  line-height:1.7;max-width:440px;
+  margin:0 auto 40px;
+  opacity:0;animation:fadeUp 0.7s 0.4s ease forwards;
+}
+.hero-btns{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp 0.7s 0.55s ease forwards;
+}
+.btn-dark{
+  background:var(--dark);color:#fff;border:none;
+  border-radius:99px;padding:14px 32px;
+  font-family:'Barlow',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block;
+}
+.btn-dark:hover{background:#3d5166;color:#fff}
+.btn-glass{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  backdrop-filter:blur(20px);
+  border-radius:99px;padding:14px 32px;
+  font-family:'Barlow',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dark);cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;
+}
+.btn-glass:hover{background:#fff}
+.hero-stats{
+  margin-top:72px;padding-top:40px;
+  border-top:1px solid rgba(44,62,80,0.08);
+  display:flex;gap:64px;justify-content:center;flex-wrap:wrap;
+  opacity:0;animation:fadeUp 0.7s 0.7s ease forwards;
+}
+.stat-val{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:40px;color:var(--dark);
+}
+.stat-label{
+  font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(44,62,80,0.38);margin-top:6px;
+}
+
+/* SECCIONES */
+section{padding:96px 48px}
+.section-badge{
+  display:inline-block;
+  font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--mid);margin-bottom:12px;
+}
+.section-title{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:clamp(2rem,5vw,3.2rem);
+  line-height:0.9;color:var(--dark);margin-bottom:16px;
+}
+.section-sub{
+  font-size:15px;font-weight:300;color:rgba(44,62,80,0.55);
+  line-height:1.7;max-width:480px;
+}
+
+/* CÓMO FUNCIONA */
+.como{background:#fff;text-align:center}
+.como .section-sub{margin:0 auto 60px}
+.pasos{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;max-width:900px;margin:0 auto;
+}
+.paso{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:16px;padding:36px 28px;text-align:left;
+}
+.paso-num{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:64px;color:var(--dark);opacity:0.08;
+  line-height:1;margin-bottom:16px;
+}
+.paso-line{width:32px;height:2px;margin-bottom:20px}
+.paso-title{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:20px;color:var(--dark);margin-bottom:10px;
+}
+.paso-text{font-size:13px;font-weight:300;color:rgba(44,62,80,0.55);line-height:1.7}
+
+/* FEATURES */
+.features{background:var(--bg)}
+.features-header{text-align:center;margin-bottom:56px}
+.features-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;max-width:960px;margin:0 auto;
+}
+.feature-card{
+  background:#fff;border:1px solid rgba(108,117,125,0.15);
+  border-radius:16px;padding:28px 24px;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.feature-card:hover{
+  border-color:var(--mid);
+  box-shadow:0 4px 24px rgba(44,62,80,0.07);
+}
+.feature-icon{
+  width:40px;height:40px;border-radius:99px;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+}
+.feature-title{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:17px;color:var(--dark);margin-bottom:8px;
+}
+.feature-text{font-size:12px;font-weight:300;color:rgba(44,62,80,0.55);line-height:1.7}
+
+/* TESTIMONIOS */
+.testimonios{background:#fff;text-align:center}
+.testimonios .section-sub{margin:0 auto 56px}
+.testimonios-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;max-width:900px;margin:0 auto;
+}
+.testi-card{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:16px;padding:32px 28px;text-align:left;
+}
+.testi-line{width:24px;height:2px;background:var(--mid);margin-bottom:24px}
+.testi-quote{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:15px;color:rgba(44,62,80,0.72);line-height:1.72;margin-bottom:24px;
+}
+.testi-name{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:16px;color:var(--dark);
+}
+.testi-rol{font-size:11px;font-weight:300;color:rgba(44,62,80,0.38);margin-top:4px}
+
+/* CTA FINAL */
+.cta-final{
+  background:var(--dark);text-align:center;
+  padding:120px 48px 80px;position:relative;overflow:hidden;
+}
+.cta-final::before{
+  content:'';position:absolute;
+  width:400px;height:200px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(108,117,125,0.3) 0%,transparent 70%);
+  top:-60px;left:50%;transform:translateX(-50%);
+  filter:blur(60px);pointer-events:none;
+}
+.cta-eyebrow{
+  font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--mid);margin-bottom:24px;position:relative;z-index:1;
+}
+.cta-title{
+  font-family:'Instrument Serif',serif;font-style:italic;
+  font-size:clamp(2.5rem,7vw,5rem);
+  line-height:0.9;color:#fff;
+  max-width:640px;margin:0 auto 20px;
+  position:relative;z-index:1;
+}
+.cta-sub{
+  font-size:15px;font-weight:300;color:rgba(255,255,255,0.5);
+  max-width:380px;margin:0 auto 40px;line-height:1.7;
+  position:relative;z-index:1;
+}
+.cta-btns{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  position:relative;z-index:1;
+}
+.btn-white{
+  background:#fff;color:var(--dark);border:none;
+  border-radius:99px;padding:14px 32px;
+  font-family:'Barlow',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block;
+}
+.btn-white:hover{background:#e9ecef;color:var(--dark)}
+.btn-outline-white{
+  background:transparent;border:1px solid rgba(255,255,255,0.25);
+  border-radius:99px;padding:14px 32px;
+  font-family:'Barlow',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.7);cursor:pointer;transition:all 0.2s;
+  text-decoration:none;display:inline-block;
+}
+.btn-outline-white:hover{border-color:rgba(255,255,255,0.6);color:#fff}
+
+/* FOOTER */
+.footer-bar{
+  border-top:1px solid rgba(255,255,255,0.08);
+  margin-top:80px;padding-top:28px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;position:relative;z-index:1;
+}
+.footer-legal{font-size:11px;font-weight:300;color:rgba(255,255,255,0.28);letter-spacing:0.5px}
+.footer-links{display:flex;gap:20px}
+.footer-links a{
+  font-size:11px;font-weight:300;
+  color:rgba(255,255,255,0.28);text-decoration:none;transition:color 0.2s;
+}
+.footer-links a:hover{color:rgba(255,255,255,0.6)}
+
+/* ANIMACIONES */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:16px 24px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero{padding:100px 24px 60px}
+  .hero-stats{gap:32px}
+  section{padding:72px 24px}
+  .cta-final{padding:80px 24px 60px}
+  .footer-bar{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Self Care</div>
+  <div class="nav-links">
+    <a href="#como">Rutina</a>
+    <a href="#features">Productos</a>
+    <a href="#testimonios">Reviews</a>
+    <a href="https://lucast3223.mitiendanube.com" class="nav-cta">Explorar</a>
+  </div>
+  <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu">
+  <button onclick="document.querySelector('.mobile-menu').classList.remove('open')" style="position:absolute;top:24px;right:24px;background:none;border:none;color:#fff;font-size:24px;cursor:pointer">✕</button>
+  <a href="#como" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Rutina</a>
+  <a href="#features" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Productos</a>
+  <a href="#testimonios" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Reviews</a>
+  <a href="https://lucast3223.mitiendanube.com" class="btn-white" style="margin-top:16px">Explorar tienda</a>
+</div>
+
+<section class="hero">
+  <div class="dots"></div>
+  <div class="hero-badge">
+    <span class="hero-badge-pill">Nuevo</span>
+    <span class="hero-badge-text">Colección 2025 disponible</span>
+  </div>
+  <h1 class="hero-title">
+    Tu piel.<br>
+    <span>Tu ritual.</span><br>
+    Tu identidad.
+  </h1>
+  <p class="hero-sub">Cuidado personal pensado para el hombre moderno. Sin complicaciones, sin etiquetas. Solo resultados.</p>
+  <div class="hero-btns">
+    <a href="https://lucast3223.mitiendanube.com" class="btn-dark">Ver productos</a>
+    <a href="#como" class="btn-glass">Conocer la marca</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-val">100%</div>
+      <div class="stat-label">Fórmulas limpias</div>
+    </div>
+    <div>
+      <div class="stat-val">3</div>
+      <div class="stat-label">Pasos diarios</div>
+    </div>
+    <div>
+      <div class="stat-val">+500</div>
+      <div class="stat-label">Hombres Self Care</div>
+    </div>
+  </div>
+</section>
+
+<section class="como" id="como">
+  <div class="reveal">
+    <div class="section-badge">Rutina diaria</div>
+    <h2 class="section-title">Así de simple.</h2>
+    <p class="section-sub">Tres pasos. Una rutina que se adapta a tu ritmo, no al revés.</p>
+  </div>
+  <div class="pasos">
+    <div class="paso reveal">
+      <div class="paso-num">01</div>
+      <div class="paso-line" style="background:#2c3e50"></div>
+      <div class="paso-title">Limpiá</div>
+      <div class="paso-text">Empezá el día con piel fresca. Un gel limpiador que elimina lo que sobra sin resecar.</div>
+    </div>
+    <div class="paso reveal">
+      <div class="paso-num">02</div>
+      <div class="paso-line" style="background:#6c757d"></div>
+      <div class="paso-title">Hidratá</div>
+      <div class="paso-text">Una crema ligera que entra rápido. Sin brillo, sin incomodidad. Solo piel en su punto.</div>
+    </div>
+    <div class="paso reveal">
+      <div class="paso-num">03</div>
+      <div class="paso-line" style="background:rgba(44,62,80,0.2)"></div>
+      <div class="paso-title">Protegé</div>
+      <div class="paso-text">Terminá con lo que corresponde. Protección que no se nota pero sí se siente con el tiempo.</div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="features-header reveal">
+    <div class="section-badge">Por qué Self Care</div>
+    <h2 class="section-title">Formulado diferente.</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="1.5" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l3 3 5-5"/></svg>
+      </div>
+      <div class="feature-title">Sin rellenos</div>
+      <div class="feature-text">Ingredientes activos, sin parafinas ni rellenos innecesarios. Lo que ves es lo que funciona.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="1.5" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
+      </div>
+      <div class="feature-title">pH balanceado</div>
+      <div class="feature-text">Formulados para la piel masculina. Más gruesa, más grasa. Por eso las recetas son distintas.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      </div>
+      <div class="feature-title">Sin fragancia fuerte</div>
+      <div class="feature-text">Aroma sutil, limpio. Nada que compita con tu perfume ni que te haga sentir incómodo.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2c3e50" stroke-width="1.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="feature-title">Absorción rápida</div>
+      <div class="feature-text">Textura pensada para no perder tiempo. Aplicás, listo. Sin esperar ni pegajosidad.</div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonios" id="testimonios">
+  <div class="reveal">
+    <div class="section-badge">Reviews</div>
+    <h2 class="section-title">Lo que dicen.</h2>
+    <p class="section-sub">Hombres reales que cambiaron su rutina.</p>
+  </div>
+  <div class="testimonios-grid">
+    <div class="testi-card reveal">
+      <div class="testi-line"></div>
+      <div class="testi-quote">Nunca pensé que iba a tener una rutina de skincare. Dos semanas después no la cambio por nada.</div>
+      <div class="testi-name">Martín R.</div>
+      <div class="testi-rol">Diseñador, 29 años</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-line"></div>
+      <div class="testi-quote">Simple, efectivo y sin drama. Justo lo que necesitaba. La crema hidratante es increíble.</div>
+      <div class="testi-name">Ezequiel V.</div>
+      <div class="testi-rol">Emprendedor, 34 años</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-line"></div>
+      <div class="testi-quote">Me lo recomendó un amigo. Tres meses después se lo estoy recomendando a todos los demás.</div>
+      <div class="testi-name">Lucas M.</div>
+      <div class="testi-rol">Arquitecto, 31 años</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="cta-eyebrow">Empezá hoy</div>
+  <h2 class="cta-title reveal">El cuidado<br>que te merecés.</h2>
+  <p class="cta-sub reveal">Tu rutina empieza con una decisión. Simple, efectiva y tuya.</p>
+  <div class="cta-btns reveal">
+    <a href="https://lucast3223.mitiendanube.com" class="btn-white">Ver productos</a>
+    <a href="#como" class="btn-outline-white">Conocer más</a>
+  </div>
+  <div class="footer-bar">
+    <span class="footer-legal">© 2025 Self Care. Todos los derechos reservados.</span>
+    <div class="footer-links">
+      <a href="#">Privacidad</a>
+      <a href="#">Términos</a>
+      <a href="https://lucast3223.mitiendanube.com">Tienda</a>
+    </div>
+  </div>
+</section>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
